@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ケアマネ支援アプリ リーフレット</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=BIZ+UDPGothic:wght@400;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --ink:     #0D1B2A;
+  --navy:    #1A3A4A;
+  --blue:    #1A5276;
+  --green:   #117A65;
+  --green-lt:#E8F5F2;
+  --teal:    #0E6655;
+  --accent:  #1A7A4A;
+  --gold:    #B7950B;
+  --gold-lt: #FEF9E7;
+  --warn:    #C0392B;
+  --paper:   #F4F7F5;
+  --rule:    #C8D5CC;
+  --white:   #FFFFFF;
+}
+
+body {
+  font-family: 'BIZ UDPGothic', 'Noto Sans JP', sans-serif;
+  background: #B0BAB5;
+  color: var(--ink);
+  width: 210mm;
+  margin: 0 auto;
+}
+
+/* ── HEADER ── */
+header { background: var(--navy); position: relative; overflow: hidden; padding: 0; }
+.hdr-stripe {
+  height: 6px;
+  background: linear-gradient(90deg,
+    #117A65  0%  25%,
+    #1A7A4A 25%  50%,
+    #B7950B 50%  75%,
+    #1A5276 75% 100%
+  );
+}
+.hdr-body {
+  padding: 20px 32px 16px;
+  display: flex; justify-content: space-between; align-items: flex-end;
+  position: relative; z-index: 1;
+}
+.hdr-body::before {
+  content: '¥';
+  position: absolute;
+  font-size: 300px; font-family: 'Oswald', sans-serif;
+  color: rgba(255,255,255,0.025);
+  right: 20px; top: -50px; line-height: 1;
+  pointer-events: none;
+}
+.hdr-eyebrow {
+  font-family: 'Oswald', sans-serif;
+  font-size: 10px; letter-spacing: 3.5px;
+  color: #F0D060; text-transform: uppercase; margin-bottom: 6px;
+}
+.hdr-title {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 34px; font-weight: 900;
+  color: white; line-height: 1.1; letter-spacing: -1px;
+}
+.hdr-title span { color: #F0D060; }
+.hdr-sub { color: rgba(255,255,255,0.55); font-size: 12px; margin-top: 7px; }
+.hdr-right { text-align: right; flex-shrink: 0; }
+.version-tag {
+  background: var(--accent);
+  color: white; font-family: 'Oswald', sans-serif;
+  font-size: 13px; letter-spacing: 2px;
+  padding: 4px 14px; border-radius: 3px;
+  display: inline-block; margin-bottom: 8px;
+}
+.score-badges { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
+.score-badge {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.85);
+  font-size: 10px; padding: 3px 10px;
+  border-radius: 3px; letter-spacing: 1px;
+}
+
+/* ── HERO BAND ── */
+.hero-band {
+  background: var(--accent);
+  padding: 10px 32px;
+  display: flex; align-items: center; gap: 10px;
+}
+.hero-band-text { font-size: 13px; font-weight: 700; color: white; line-height: 1.5; }
+.hero-band-text strong { font-size: 15px; display: block; }
+.hero-icon { font-size: 26px; flex-shrink: 0; }
+
+/* ── BODY ── */
+.body-wrap {
+  background: var(--paper);
+  padding: 22px 26px 18px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* ── SECTION TITLES ── */
+.sec-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 11px; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--teal);
+  border-bottom: 2px solid var(--teal);
+  padding-bottom: 5px; margin-bottom: 12px;
+  display: flex; align-items: center; gap: 7px;
+}
+.sec-title .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+
+/* ── CARD ── */
+.card {
+  background: white; border-radius: 6px; padding: 14px 16px;
+  box-shadow: 0 1px 8px rgba(13,27,42,0.07), 0 0 0 1px rgba(0,0,0,0.04);
+}
+
+/* ── TARGET ── */
+.target-wrap { grid-column: 1 / 3; }
+.target-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+.target-item {
+  display: flex; gap: 10px; align-items: flex-start;
+  background: #EDF5F2; border-radius: 6px;
+  padding: 11px 12px; border-left: 4px solid var(--accent);
+}
+.target-item.b { border-left-color: var(--gold); background: var(--gold-lt); }
+.target-item.c { border-left-color: var(--blue); background: #EDF2F8; }
+.t-emoji { font-size: 24px; flex-shrink: 0; line-height: 1; margin-top: 1px; }
+.t-head { font-size: 12.5px; font-weight: 700; color: var(--navy); margin-bottom: 3px; line-height: 1.5; }
+.t-head em { font-style: normal; color: var(--warn); }
+.t-desc { font-size: 10.5px; color: #555; line-height: 1.6; }
+
+/* ── FEATURES 2-column ── */
+.features-wrap { grid-column: 1 / 3; }
+.feat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.feat {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 10px 12px; background: #F2F7F4;
+  border-radius: 5px; border-left: 3px solid var(--accent);
+}
+.feat.gold { border-left-color: var(--gold); background: var(--gold-lt); }
+.feat.blue { border-left-color: var(--blue); background: #EDF2F8; }
+.feat-icon { font-size: 19px; flex-shrink: 0; margin-top: 1px; line-height: 1; }
+.feat-title { font-size: 12px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+.feat-desc { font-size: 10px; color: #555; line-height: 1.6; }
+
+/* ── SERVICE TABLE ── */
+.service-wrap { grid-column: 1 / 2; }
+.service-list { display: flex; flex-direction: column; gap: 5px; }
+.svc {
+  display: flex; align-items: center;
+  border-radius: 5px; overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.svc-icon {
+  width: 30px; text-align: center;
+  padding: 8px 0; font-size: 14px;
+  background: var(--navy); flex-shrink: 0;
+}
+.svc-name {
+  flex: 1; padding: 7px 10px;
+  font-size: 11.5px; font-weight: 700;
+  background: #EDF5F2; color: var(--navy);
+}
+.svc-detail {
+  padding: 7px 10px;
+  font-size: 10px; color: #555;
+  background: #F8FBF9;
+  border-left: 1px solid #D5E8DE;
+  flex: 1.2;
+}
+
+/* ── LIMIT TABLE ── */
+.limit-wrap { grid-column: 2 / 3; }
+.limit-list { display: flex; flex-direction: column; gap: 4px; }
+.lim {
+  display: flex; align-items: center;
+  border-radius: 4px; overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.lim-grade {
+  width: 80px; flex-shrink: 0;
+  padding: 6px 8px;
+  font-size: 11px; font-weight: 700;
+  background: var(--navy); color: white;
+  text-align: center;
+}
+.lim-limit {
+  flex: 1; padding: 6px 10px;
+  font-size: 11px; background: #F0F7F4; color: var(--ink);
+  font-family: 'Oswald', sans-serif; font-weight: 500;
+  letter-spacing: 0.5px;
+}
+.lim-note { font-size: 9px; color: #888; margin-top: 1px; font-family: 'BIZ UDPGothic', sans-serif; font-weight: 400; display: block; }
+
+/* ── FLOW ── */
+.flow-wrap { grid-column: 1 / 3; }
+.flow-steps {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 0; position: relative;
+}
+.flow-steps::before {
+  content: '';
+  position: absolute;
+  top: 19px; left: calc(10% + 14px); right: calc(10% + 14px);
+  height: 2px;
+  background: repeating-linear-gradient(90deg, var(--rule) 0 6px, transparent 6px 10px);
+}
+.flow-step { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 5px; }
+.flow-num {
+  width: 38px; height: 38px; border-radius: 50%;
+  color: white; font-family: 'Oswald', sans-serif;
+  font-size: 18px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1; margin-bottom: 6px;
+  border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.fn1 { background: var(--navy); }
+.fn2 { background: var(--accent); }
+.fn3 { background: var(--gold); }
+.fn4 { background: var(--blue); }
+.fn5 { background: var(--teal); }
+.flow-emoji { font-size: 16px; margin-bottom: 3px; }
+.flow-title { font-size: 11px; font-weight: 700; color: var(--navy); margin-bottom: 2px; line-height: 1.35; }
+.flow-desc { font-size: 9.5px; color: #666; line-height: 1.5; }
+
+/* ── BOTTOM ROW ── */
+.bottom-row { grid-column: 1 / 3; display: grid; grid-template-columns: 1.35fr 1fr; gap: 14px; }
+
+/* ── MOCK SCREENS ── */
+.mock-screens {
+  display: flex; gap: 10px; padding: 12px;
+  background: #D0DAD5; border-radius: 6px;
+}
+.phone {
+  flex: 1; background: white; border-radius: 10px;
+  border: 1.5px solid #B0C0B8; overflow: hidden;
+  box-shadow: 0 5px 16px rgba(0,0,0,0.13);
+}
+.phone-hdr {
+  background: var(--navy); padding: 5px 8px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 7.5px; font-weight: 700; color: white;
+}
+.phone-hdr .ver { color: rgba(255,255,255,0.45); }
+.phone-tabs { display: flex; border-bottom: 1px solid #E0E8E4; }
+.p-tab { flex: 1; text-align: center; font-size: 6.5px; font-weight: 700; padding: 4px 2px; color: #888; }
+.p-tab.active { background: var(--navy); color: white; }
+.phone-body { padding: 7px 6px; }
+.p-label { font-size: 7px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+.p-select {
+  background: #F5F7F6; border: 1px solid #C8D5CC;
+  border-radius: 4px; padding: 4px 6px;
+  font-size: 7px; color: var(--ink); margin-bottom: 5px;
+  display: flex; justify-content: space-between;
+}
+.p-svc-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 4px 5px; background: #EDF5F2;
+  border-radius: 3px; margin-bottom: 3px;
+  font-size: 7px; border-left: 2px solid var(--accent);
+}
+.p-svc-name { font-weight: 700; color: var(--navy); }
+.p-svc-val { color: var(--teal); font-weight: 700; }
+
+.p-limit-bar-wrap { margin: 5px 0; }
+.p-limit-label { font-size: 6.5px; color: #666; margin-bottom: 2px; display: flex; justify-content: space-between; }
+.p-limit-bar-bg {
+  height: 8px; background: #E0E8E4; border-radius: 10px; overflow: hidden;
+}
+.p-limit-bar-fill {
+  height: 100%; border-radius: 10px; background: var(--accent);
+  width: 72%;
+}
+.p-limit-bar-fill.over { background: var(--warn); width: 108%; }
+
+.p-total-box {
+  background: var(--navy); border-radius: 4px;
+  padding: 5px 7px; margin-top: 4px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.p-total-label { font-size: 7px; color: rgba(255,255,255,0.7); }
+.p-total-val { font-size: 11px; font-weight: 900; color: #F0D060; font-family: 'Oswald', sans-serif; }
+
+/* dashboard screen */
+.p-dash-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-bottom: 5px;
+}
+.p-kpi {
+  background: #EDF5F2; border-radius: 4px; padding: 5px 6px;
+  border-top: 2px solid var(--accent);
+}
+.p-kpi.gold { border-top-color: var(--gold); background: #FEF9E7; }
+.p-kpi.blue { border-top-color: var(--blue); background: #EDF2F8; }
+.p-kpi-label { font-size: 6.5px; color: #666; margin-bottom: 2px; }
+.p-kpi-val { font-size: 12px; font-weight: 900; color: var(--navy); font-family: 'Oswald', sans-serif; }
+.p-kpi-unit { font-size: 6.5px; color: #888; margin-top: 1px; }
+.p-chart-bar {
+  display: flex; gap: 2px; align-items: flex-end;
+  height: 36px; margin-top: 5px;
+  padding: 0 4px; background: #F5F8F6; border-radius: 4px;
+}
+.p-bar { flex: 1; border-radius: 2px 2px 0 0; }
+.p-bar-label { font-size: 5.5px; text-align: center; margin-top: 2px; color: #888; }
+.p-bep-line {
+  font-size: 6.5px; font-weight: 700; color: var(--warn);
+  text-align: center; margin-top: 3px;
+  border-top: 1.5px dashed var(--warn); padding-top: 2px;
+}
+
+/* ── PRICING ── */
+.pricing-card {
+  background: var(--navy); color: white; border-radius: 6px;
+  overflow: hidden; display: flex; flex-direction: column;
+  box-shadow: 0 4px 20px rgba(18,41,74,0.3);
+}
+.pricing-top { padding: 16px 18px 12px; position: relative; overflow: hidden; flex: 1; }
+.pricing-top::after {
+  content: '¥'; position: absolute; right: 5px; top: -5px;
+  font-size: 110px; font-family: 'Oswald', sans-serif;
+  color: rgba(255,255,255,0.04); font-weight: 700; line-height: 1;
+  pointer-events: none;
+}
+.plan-eyebrow {
+  font-family: 'Oswald', sans-serif; font-size: 10px;
+  letter-spacing: 2.5px; color: #F0D060; margin-bottom: 7px;
+}
+.plan-name { font-size: 19px; font-weight: 900; line-height: 1.25; margin-bottom: 10px; }
+.plan-name span { color: #F0D060; }
+.plan-free-box {
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 5px; padding: 8px 11px; margin-bottom: 9px;
+}
+.plan-free-label { font-size: 9px; color: rgba(255,255,255,0.5); margin-bottom: 2px; }
+.plan-free-val { font-size: 12.5px; font-weight: 700; }
+.plan-free-limit { font-size: 9px; color: rgba(255,255,255,0.4); margin-top: 1px; }
+.plan-paid-box {
+  background: #0E5035; border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 5px; padding: 10px 11px; margin-bottom: 10px;
+}
+.plan-paid-label { font-size: 9px; color: rgba(255,255,255,0.8); margin-bottom: 3px; }
+.plan-price { font-family: 'Oswald', sans-serif; font-size: 27px; font-weight: 700; color: white; line-height: 1; }
+.plan-price sub { font-size: 12px; font-family: 'Noto Sans JP', sans-serif; }
+.plan-price sup { font-size: 13px; }
+.plan-price-note { font-size: 9px; color: rgba(255,255,255,0.75); margin-top: 3px; }
+.plan-perks { display: flex; flex-direction: column; gap: 5px; }
+.perk { display: flex; align-items: flex-start; gap: 7px; font-size: 10.5px; color: rgba(255,255,255,0.85); }
+.perk::before { content: '✓'; color: #F0D060; font-weight: 700; flex-shrink: 0; }
+
+/* ── QR BOTTOM ── */
+.pricing-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding: 12px 18px; display: flex; gap: 12px; align-items: center;
+}
+.qr-canvas-wrap {
+  width: 64px; height: 64px; background: white;
+  border-radius: 5px; display: flex; align-items: center;
+  justify-content: center; flex-shrink: 0; padding: 4px;
+}
+#qr-keamane canvas, #qr-keamane img { width: 56px !important; height: 56px !important; }
+.qr-info { display: flex; flex-direction: column; justify-content: center; }
+.qr-label { font-size: 9px; color: rgba(255,255,255,0.5); margin-bottom: 6px; }
+.qr-scan-link {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--accent); color: white; text-decoration: none;
+  padding: 8px 13px; border-radius: 5px; margin-bottom: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+.qr-scan-link:hover { opacity: 0.85; }
+.qr-scan-icon { font-size: 17px; line-height: 1; }
+.qr-scan-text { font-size: 12.5px; font-weight: 700; color: white; }
+.qr-arrow { font-size: 13px; opacity: 0.75; color: white; }
+.qr-note { font-size: 9px; color: rgba(255,255,255,0.35); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink); color: rgba(255,255,255,0.4);
+  font-size: 9px; text-align: center;
+  padding: 7px 24px; line-height: 1.7; letter-spacing: 0.3px;
+}
+footer strong { color: rgba(255,255,255,0.7); }
+
+@media print { body { width: 210mm; margin: 0; } }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="hdr-stripe"></div>
+  <div class="hdr-body">
+    <div>
+      <div class="hdr-eyebrow">Care Manager Support &amp; Business Simulation App</div>
+      <div class="hdr-title">ケアマネ<span>支援アプリ</span></div>
+      <div class="hdr-sub">費用計算・自己負担の可視化・損益分岐点まで。ケアマネ業務をまるごとサポート。</div>
+    </div>
+    <div class="hdr-right">
+      <div class="version-tag">V 1.6</div>
+      <div class="score-badges">
+        <span class="score-badge">費用計算・見積書作成</span>
+        <span class="score-badge">経営ダッシュボード</span>
+        <span class="score-badge">損益分岐点・目標利益</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- HERO BAND -->
+<div class="hero-band">
+  <div class="hero-icon">💰</div>
+  <div class="hero-band-text">
+    <strong>「利用者への説明」も「事業所の経営分析」も、これ一本で。ケアマネの"面倒"を全部なくす。</strong>
+    居宅介護支援事業所のケアマネジャー ／ サービス担当者会議での費用説明 ／ 管理者・経営者の収益管理まで
+  </div>
+</div>
+
+<div class="body-wrap">
+
+  <!-- TARGET -->
+  <div class="target-wrap">
+    <div class="card">
+      <div class="sec-title"><span class="dot"></span>こんな方におすすめ ─ 3つのシーン</div>
+      <div class="target-grid">
+        <div class="target-item">
+          <div class="t-emoji">🧮</div>
+          <div>
+            <div class="t-head">利用者・家族への<em>費用説明に時間がかかる…</em></div>
+            <div class="t-desc">要介護度・負担割合・サービスを選ぶだけで自己負担額を即時算出。その場で印刷できる「概算見積書」がそのまま説明資料になります。</div>
+          </div>
+        </div>
+        <div class="target-item b">
+          <div class="t-emoji">📈</div>
+          <div>
+            <div class="t-head">事業所の収益、<em>どこで黒字になるか把握できていない…</em></div>
+            <div class="t-desc">固定費・顧客比率を入力するだけで損益分岐点と推奨目標件数を自動計算。「何件受ければ利益20%か」が一目でわかります。</div>
+          </div>
+        </div>
+        <div class="target-item c">
+          <div class="t-emoji">📋</div>
+          <div>
+            <div class="t-head">支給限度額の超過、<em>うっかりミスが心配…</em></div>
+            <div class="t-desc">単位数の累計をリアルタイムで管理し、超過すると即座に警告表示。加算・減算・限度額外費用も正確に反映します。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="features-wrap">
+    <div class="card">
+      <div class="sec-title"><span class="dot"></span>主な機能・特徴</div>
+      <div class="feat-grid">
+        <div class="feat">
+          <div class="feat-icon">💴</div>
+          <div>
+            <div class="feat-title">介護サービス費用を即時計算</div>
+            <div class="feat-desc">訪問介護・訪問看護・通所介護など7種のサービスに対応。要介護度・負担割合を選ぶだけで自己負担額を自動算出。</div>
+          </div>
+        </div>
+        <div class="feat gold">
+          <div class="feat-icon">📊</div>
+          <div>
+            <div class="feat-title">損益分岐点・目標利益を可視化</div>
+            <div class="feat-desc">月間固定費・目標利益率を入力すると損益分岐点件数と推奨目標件数をグラフで表示。経営判断をデータで支援。</div>
+          </div>
+        </div>
+        <div class="feat gold">
+          <div class="feat-icon">🖨️</div>
+          <div>
+            <div class="feat-title">概算見積書を印刷・PDF保存</div>
+            <div class="feat-desc">「介護サービス ご利用概算見積書」を作成日・署名付きで印刷できる。サービス担当者会議での説明資料として即活用可能。</div>
+          </div>
+        </div>
+        <div class="feat blue">
+          <div class="feat-icon">⚙️</div>
+          <div>
+            <div class="feat-title">地域単価・独自項目をカスタマイズ</div>
+            <div class="feat-desc">地域単価設定・マスタ項目追加（基本単位・加算・減算・限度額外費用）に対応。各事業所の実態に合わせた計算が可能。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICE TABLE -->
+  <div class="service-wrap">
+    <div class="card">
+      <div class="sec-title"><span class="dot"></span>対応サービス一覧</div>
+      <div class="service-list">
+        <div class="svc">
+          <div class="svc-icon">🏠</div>
+          <div class="svc-name">訪問介護</div>
+          <div class="svc-detail">身体介護・生活援助・通院介助など</div>
+        </div>
+        <div class="svc">
+          <div class="svc-icon">🩺</div>
+          <div class="svc-name">訪問看護</div>
+          <div class="svc-detail">医療的ケア・療養上の世話など</div>
+        </div>
+        <div class="svc">
+          <div class="svc-icon">🦽</div>
+          <div class="svc-name">訪問リハビリ</div>
+          <div class="svc-detail">理学療法士・作業療法士による訪問</div>
+        </div>
+        <div class="svc">
+          <div class="svc-icon">🏢</div>
+          <div class="svc-name">通所介護</div>
+          <div class="svc-detail">デイサービスでの日中ケア</div>
+        </div>
+        <div class="svc">
+          <div class="svc-icon">🏥</div>
+          <div class="svc-name">通所リハ</div>
+          <div class="svc-detail">老健・病院でのデイケア</div>
+        </div>
+        <div class="svc">
+          <div class="svc-icon">🛏️</div>
+          <div class="svc-name">短期入所生活介護</div>
+          <div class="svc-detail">ショートステイ（施設入所）</div>
+        </div>
+        <div class="svc">
+          <div class="svc-icon">🪑</div>
+          <div class="svc-name">福祉用具</div>
+          <div class="svc-detail">レンタル・購入費用の計算</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIMIT TABLE -->
+  <div class="limit-wrap">
+    <div class="card">
+      <div class="sec-title"><span class="dot"></span>要介護度別 支給限度額（単位数）</div>
+      <div class="limit-list">
+        <div class="lim">
+          <div class="lim-grade">要支援 1</div>
+          <div class="lim-limit">5,032 単位<span class="lim-note">約50,320円相当（地域により変動）</span></div>
+        </div>
+        <div class="lim">
+          <div class="lim-grade">要支援 2</div>
+          <div class="lim-limit">10,531 単位<span class="lim-note">約105,310円相当</span></div>
+        </div>
+        <div class="lim">
+          <div class="lim-grade">要介護 1</div>
+          <div class="lim-limit">16,765 単位<span class="lim-note">約167,650円相当</span></div>
+        </div>
+        <div class="lim">
+          <div class="lim-grade">要介護 2</div>
+          <div class="lim-limit">19,705 単位<span class="lim-note">約197,050円相当</span></div>
+        </div>
+        <div class="lim">
+          <div class="lim-grade">要介護 3</div>
+          <div class="lim-limit">27,048 単位<span class="lim-note">約270,480円相当</span></div>
+        </div>
+        <div class="lim">
+          <div class="lim-grade">要介護 4</div>
+          <div class="lim-limit">30,938 単位<span class="lim-note">約309,380円相当</span></div>
+        </div>
+        <div class="lim">
+          <div class="lim-grade">要介護 5</div>
+          <div class="lim-limit">36,217 単位<span class="lim-note">約362,170円相当</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOW -->
+  <div class="flow-wrap">
+    <div class="card">
+      <div class="sec-title"><span class="dot"></span>使い方 ─ 簡単５ステップ</div>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-num fn1">1</div>
+          <div class="flow-emoji">👤</div>
+          <div class="flow-title">要介護度・<br>負担割合を設定</div>
+          <div class="flow-desc">支給限度額が自動で反映される</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num fn2">2</div>
+          <div class="flow-emoji">📝</div>
+          <div class="flow-title">サービスを<br>選んで入力</div>
+          <div class="flow-desc">7種のサービスから回数・単位を入力</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num fn3">3</div>
+          <div class="flow-emoji">💴</div>
+          <div class="flow-title">自己負担額を<br>即時確認</div>
+          <div class="flow-desc">限度額内・外費用を自動計算・警告</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num fn4">4</div>
+          <div class="flow-emoji">🖨️</div>
+          <div class="flow-title">見積書を<br>印刷・PDF保存</div>
+          <div class="flow-desc">署名欄付きの説明資料として活用</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num fn5">5</div>
+          <div class="flow-emoji">📈</div>
+          <div class="flow-title">経営ダッシュ<br>ボードで分析</div>
+          <div class="flow-desc">損益分岐点・目標件数を可視化</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM ROW -->
+  <div class="bottom-row">
+
+    <!-- MOCK SCREENS -->
+    <div class="card">
+      <div class="sec-title"><span class="dot"></span>アプリ画面プレビュー</div>
+      <div class="mock-screens">
+
+        <!-- Screen A: 費用計算 -->
+        <div class="phone">
+          <div class="phone-hdr">
+            <span>💰 ケアマネ支援アプリ</span>
+            <span class="ver">V1.6</span>
+          </div>
+          <div class="phone-tabs">
+            <div class="p-tab active">💰 プラン計算</div>
+            <div class="p-tab">📈 経営分析</div>
+            <div class="p-tab">⚙️ 設定</div>
+          </div>
+          <div class="phone-body">
+            <div class="p-label">負担割合 / 要介護度</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-bottom:4px;">
+              <div class="p-select"><span>1割負担</span><span>⌄</span></div>
+              <div class="p-select"><span>要介護2（19,705）</span><span>⌄</span></div>
+            </div>
+            <div class="p-label">サービス内訳</div>
+            <div class="p-svc-row">
+              <span class="p-svc-name">🏠 訪問介護 × 12回</span>
+              <span class="p-svc-val">8,760単位</span>
+            </div>
+            <div class="p-svc-row">
+              <span class="p-svc-name">🩺 訪問看護 × 4回</span>
+              <span class="p-svc-val">4,560単位</span>
+            </div>
+            <div class="p-svc-row">
+              <span class="p-svc-name">🪑 福祉用具レンタル</span>
+              <span class="p-svc-val">2,500単位</span>
+            </div>
+            <div class="p-limit-bar-wrap">
+              <div class="p-limit-label">
+                <span>使用単位：15,820 / 19,705単位</span>
+                <span style="color:var(--accent);font-weight:700;">80%</span>
+              </div>
+              <div class="p-limit-bar-bg">
+                <div class="p-limit-bar-fill"></div>
+              </div>
+            </div>
+            <div class="p-total-box">
+              <span class="p-total-label">自己負担概算（1割）</span>
+              <span class="p-total-val">¥15,820</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Screen B: 経営分析 -->
+        <div class="phone">
+          <div class="phone-hdr">
+            <span>📈 居宅経営分析</span>
+            <span class="ver">ダッシュボード</span>
+          </div>
+          <div class="phone-tabs">
+            <div class="p-tab">💰 プラン計算</div>
+            <div class="p-tab active">📈 経営分析</div>
+            <div class="p-tab">⚙️ 設定</div>
+          </div>
+          <div class="phone-body">
+            <div class="p-dash-row">
+              <div class="p-kpi">
+                <div class="p-kpi-label">損益分岐点</div>
+                <div class="p-kpi-val">18<span style="font-size:8px;font-family:'BIZ UDPGothic'">件</span></div>
+                <div class="p-kpi-unit">この件数で収支ゼロ</div>
+              </div>
+              <div class="p-kpi gold">
+                <div class="p-kpi-label">推奨目標（利益20%）</div>
+                <div class="p-kpi-val">23<span style="font-size:8px;font-family:'BIZ UDPGothic'">件</span></div>
+                <div class="p-kpi-unit">目標利益達成ライン</div>
+              </div>
+            </div>
+            <div class="p-dash-row">
+              <div class="p-kpi blue">
+                <div class="p-kpi-label">要支援 平均単価</div>
+                <div class="p-kpi-val">¥<span style="font-size:10px;">11,200</span></div>
+                <div class="p-kpi-unit">/月・1件あたり</div>
+              </div>
+              <div class="p-kpi blue">
+                <div class="p-kpi-label">要介護 平均単価</div>
+                <div class="p-kpi-val">¥<span style="font-size:10px;">38,500</span></div>
+                <div class="p-kpi-unit">/月・1件あたり</div>
+              </div>
+            </div>
+            <div class="p-chart-bar">
+              <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+                <div class="p-bar" style="height:18px;background:#C8D5CC;"></div>
+                <div class="p-bar-label">15件</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+                <div class="p-bar" style="height:24px;background:#117A65;"></div>
+                <div class="p-bar-label">18件</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+                <div class="p-bar" style="height:30px;background:#1A7A4A;"></div>
+                <div class="p-bar-label">20件</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+                <div class="p-bar" style="height:36px;background:#B7950B;"></div>
+                <div class="p-bar-label">23件</div>
+              </div>
+            </div>
+            <div class="p-bep-line">▲ 損益分岐点：18件 ／ 推奨目標：23件</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PRICING -->
+    <div class="pricing-card">
+      <div class="pricing-top">
+        <div class="plan-eyebrow">SUBSCRIPTION PLAN</div>
+        <div class="plan-name">ワンタイムPWで<br><span>フル機能</span>を開放</div>
+
+        <div class="plan-free-box">
+          <div class="plan-free-label">🆓 無料プラン（まずは試す）</div>
+          <div class="plan-free-val">印刷・PDF保存：月5回まで</div>
+          <div class="plan-free-limit">費用計算・経営分析は無制限で使えます</div>
+        </div>
+
+        <div class="plan-paid-box">
+          <div class="plan-paid-label">⭐ 有料プラン（ワンタイムパスワード）</div>
+          <div class="plan-price"><sup>¥</sup>———<sub>/月</sub></div>
+          <div class="plan-price-note">印刷・PDF保存 無制限 ／ 全機能開放</div>
+        </div>
+
+        <div class="plan-perks">
+          <div class="perk">概算見積書の印刷・PDF保存が無制限に</div>
+          <div class="perk">7種サービス・加算減算・限度額外費用対応</div>
+          <div class="perk">地域単価・マスタ項目カスタマイズ</div>
+          <div class="perk">損益分岐点・目標利益のグラフ表示</div>
+          <div class="perk">インストール不要・ブラウザで動く</div>
+        </div>
+      </div>
+
+      <div class="pricing-bottom">
+        <div class="qr-canvas-wrap">
+          <div id="qr-keamane"></div>
+        </div>
+        <div class="qr-info">
+          <div class="qr-label">QRコードを読み取ってアクセス</div>
+          <a href="https://tacchibanana.github.io/KEAMANE-support-SEIGEN/" target="_blank" class="qr-scan-link">
+            <span class="qr-scan-icon">📲</span>
+            <span class="qr-scan-text">今すぐ無料で試す</span>
+            <span class="qr-arrow">→</span>
+          </a>
+          <div class="qr-note">© 2026 TACCHIBANANA</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <strong>ケアマネ支援アプリ（ケアプラン費用＆経営シミュレーター V1.6）</strong>　｜　介護保険制度準拠　｜　© 2026 TACCHIBANANA
+  <br>⚠️ 本ツールが算出する費用はあくまで概算です。実際の請求額は端数処理やサービス提供状況により変動する場合があります。最終確認は各サービス事業所にお問い合わせください。
+</footer>
+
+<script>
+  new QRCode(document.getElementById("qr-keamane"), {
+    text: "https://tacchibanana.github.io/KEAMANE-support-SEIGEN/",
+    width: 56,
+    height: 56,
+    colorDark: "#1A3A4A",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.M
+  });
+</script>
+</body>
+</html>
